@@ -21,8 +21,6 @@ public class WordCountSQL {
 
 
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-        BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
-
 
         List list  =  new ArrayList();
 
@@ -37,13 +35,10 @@ public class WordCountSQL {
         }
         DataSet<WC> input = env.fromCollection(list);
 
+        BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
         tEnv.registerDataSet("WordCount", input, "word, frequency");
-
-        Table table = tEnv.sqlQuery(
-                "SELECT word, SUM(frequency) as frequency FROM WordCount GROUP BY word");
-
+        Table table = tEnv.sqlQuery("SELECT word, SUM(frequency) as frequency FROM WordCount GROUP BY word");
         DataSet<WC> result = tEnv.toDataSet(table, WC.class);
-
         result.print();
 
 

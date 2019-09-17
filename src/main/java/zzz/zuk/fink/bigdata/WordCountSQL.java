@@ -15,6 +15,11 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 import org.apache.flink.util.Collector;
 
 
+/***
+ * 注意WC类必须实现无参构造函数
+ * @author huangliao
+ *
+ */
 public class WordCountSQL {
 
 	

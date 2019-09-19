@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.common.operators.Order;
 import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.api.java.operators.CrossOperator;
 import org.apache.flink.api.java.operators.DataSource;
 import org.apache.flink.api.java.operators.JoinOperator;
 import org.apache.flink.api.java.operators.JoinOperator.EquiJoin;
@@ -72,7 +73,8 @@ public class TransformationTable {
 	 * @throws Exception 
 	 */
 	public static void cross(DataSource<Tuple2<Integer, String>> datasource1, DataSource<Tuple2<Integer, String>> datasource2) throws Exception{
-		 datasource1.cross(datasource2).print();
+		CrossOperator.DefaultCross<Tuple2<Integer, String>, Tuple2<Integer, String>> cross = datasource1.cross(datasource2);
+		cross.print();
 	}
 	
 	/***

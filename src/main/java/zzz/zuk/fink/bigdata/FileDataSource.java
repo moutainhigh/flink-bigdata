@@ -13,6 +13,7 @@ public class FileDataSource {
 	@SuppressWarnings("serial")
 	public static void main(String[] args) throws Exception {
 		ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment();
+		//文件中获取
 		String filePath = "text";
 		DataSource<String> datasource = env.readTextFile(filePath);
 		datasource.print();
@@ -32,6 +33,7 @@ public class FileDataSource {
 		
 		ao.print();
 		
+		//输出到文件中
 		ao.writeAsText("/Users/huangliao/Desktop/textOutput1.txt")
 		  .setParallelism(1);
 		ao.writeAsCsv("/Users/huangliao/Desktop/textOutput2.txt")

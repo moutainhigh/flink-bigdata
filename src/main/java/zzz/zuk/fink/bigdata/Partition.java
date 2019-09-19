@@ -111,10 +111,17 @@ public class Partition {
 		
 	}
 	
-	
+	/***
+	 * 自定义分区
+	 * @author huangliao
+	 *
+	 */
 	@SuppressWarnings("serial")
 	public static class MyPartition implements Partitioner<Integer>{
 
+		/***
+		 * 
+		 */
 		@Override
 		public int partition(Integer key, int numPartitions) {
 			System.err.println("分区总数：" + numPartitions);

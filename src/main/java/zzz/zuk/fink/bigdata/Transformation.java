@@ -55,7 +55,32 @@ public class Transformation {
 //		flatmap(datasource);
 //		filter(datasource);
 //		mapPartition(datasource);
-		reduce(datasource);
+//		reduce(datasource);
+//		aggregate(datasource);
+		
+	}
+	
+	/***
+	 * @param datasource
+	 * @throws Exception 
+	 */
+	@SuppressWarnings("serial")
+	public static void aggregate(DataSource<String> datasource) throws Exception{
+		
+		MapOperator<String, Tuple2<String, Integer>> mapOpt =
+		datasource.map(new MapFunction<String, Tuple2<String, Integer>>() {
+
+			@Override
+			public Tuple2<String, Integer> map(String arg0) throws Exception {
+				return new Tuple2<String, Integer>(arg0,1);
+			}
+		});
+		 
+//		mapOpt.print();
+//		mapOpt.groupBy(0).max(1).print();
+//		mapOpt.min(1).print();
+//		mapOpt.sum(1).print();
+	
 	}
 	
 	/**

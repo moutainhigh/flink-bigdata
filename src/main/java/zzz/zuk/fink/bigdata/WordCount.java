@@ -1,10 +1,14 @@
 package zzz.zuk.fink.bigdata;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.api.common.functions.FlatMapFunction;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies.RestartStrategyConfiguration;
+import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.AggregateOperator;
 import org.apache.flink.api.java.operators.DataSource;
@@ -23,6 +27,12 @@ public class WordCount {
 	public static void main(String[] args) throws Exception {
 		
 		ExecutionEnvironment env = ExecutionEnvironment.createLocalEnvironment();
+		
+		//报错，重试3次，5秒
+		env.setNumberOfExecutionRetries(3);
+		RestartStrategyConfiguration restartStrategyConfiguration = RestartStrategies.fixedDelayRestart(3, Time.seconds(5));
+		env.setRestartStrategy(restartStrategyConfiguration);
+		
 		List<String> data = new ArrayList<String>();
 		data.add("to be or not to be is question");
 		data.add("what is your question");
